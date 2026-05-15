@@ -4,9 +4,10 @@ import (
 	"context"
 	"fmt"
 	"log"
+	"net/http"
 
 	"github.com/zonafirmann/go-inventory-api/config"
-	"github.com/zonafirmann/go-inventory-api/repository"
+	"github.com/zonafirmann/go-inventory-api/handlers"
 )
 
 func main() {
@@ -14,15 +15,16 @@ func main() {
 	db := config.ConnectDB()
 	defer db.Close(context.Background())
 
-	// 2. Fetch all products using the repository layer
-	products, err := repository.GetAllProducts(db)
-	if err != nil {
-		log.Fatalf("Failed to fetch products: %v", err)
-	}
+	// 2. Define API Routes
+	// We pass the 'db' connection to the handler so it can access the database
+	http.HandleFunc("/products", handlers.GetProductsHandler(db))
 
-	// 3. Display Results
-	fmt.Println("\n📦 GLOBAL INVENTORY REPORT:")
-	for _, p := range products {
-		fmt.Printf("[%d] %-20s | Stock: %-5d | Price: Rp%d\n", p.ID, p.Name, p.Stock, p.Price)
+	// 3. Start the Web Server
+	port := ":8080"
+	fmt.Printf("🚀 Inventory API Server is running on http://localhost%s\n", port)
+
+	err := http.ListenAndServe(port, nil)
+	if err != nil {
+		log.Fatalf("Server failed to start: %v", err)
 	}
 }
