@@ -1,6 +1,6 @@
 package models
 
-// Product represents a single item in our warehouse inventory.
+// Product represents the inventory data structure in the database
 type Product struct {
 	ID    int    `json:"id"`
 	Name  string `json:"name"`
