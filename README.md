@@ -2,6 +2,14 @@
 
 A high-performance, persistent RESTful API built with **Golang** to manage a warehouse inventory system. This project demonstrates core backend architecture principles, clean data modeling, and robust HTTP request handling without relying on heavy external frameworks.
 
+# 📦 Go Inventory API
+
+[![Enterprise Go CI/CD](https://github.com/zonafirmann/go-inventory-api/actions/workflows/go-ci.yml/badge.svg)](https://github.com/zonafirmann/go-inventory-api/actions/workflows/go-ci.yml)
+![Go Version](https://img.shields.io/github/go-mod/go-version/zonafirmann/go-inventory-api?style=flat&logo=go)
+![License](https://img.shields.io/github/license/zonafirmann/go-inventory-api?style=flat)
+
+A high-performance, persistent RESTful API... (lanjutkan teks aslinya)
+
 ## ⚡ Core Features
 * **Full CRUD Operations:** Seamlessly Create, Read, Update, and Delete inventory items.
 * **Persistent Storage:** Utilizes a custom JSON I/O engine to ensure data durability across server restarts.
