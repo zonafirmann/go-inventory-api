@@ -1,1 +1,10 @@
+# Binaries
 *.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Database & Environment
+.env
+products.json
