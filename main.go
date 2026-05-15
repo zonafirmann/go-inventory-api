@@ -27,6 +27,25 @@ func main() {
 	fmt.Println("✅ STATUS: CONNECTED TO POSTGRESQL 18")
 	fmt.Println("------------------------------------------")
 
+	// --- PART 1: INSERT DATA ---
+
+	// Define new product data
+	newName := "Gaming Mouse RGB"
+	newStock := 25
+	newPrice := 450000
+
+	// SQL query using placeholders ($1, $2, $3) to prevent SQL Injection
+	// This is a security best practice in 2026
+	sqlStatement := `INSERT INTO products (name, stock, price) VALUES ($1, $2, $3)`
+
+	// Execute the command
+	_, err = conn.Exec(context.Background(), sqlStatement, newName, newStock, newPrice)
+	if err != nil {
+		log.Fatalf("Failed to insert data: %v", err)
+	}
+
+	fmt.Println("Successfully added new product to the database!")
+
 	// Execute query to fetch all products from the table
 	rows, err := conn.Query(context.Background(), "SELECT id, name, stock, price FROM products")
 	if err != nil {
