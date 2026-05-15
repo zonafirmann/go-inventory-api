@@ -31,5 +31,15 @@ The application follows the **Separation of Concerns** principle:
 3. Run `go run main.go`.
 4. Access the API at `http://localhost:8080/products`.
 
+## 💸 Transaction Module (Mini Project Phase 1)
+The API now supports secure transaction processing with the following features:
+- **ACID Transactions:** Using `Begin`, `Commit`, and `Rollback` to ensure data consistency.
+- **Stock Validation:** Prevents sales if stock is insufficient.
+- **Atomic Operations:** Automatically updates product stock upon successful transaction.
+
+### New API Endpoint
+| Method | Endpoint | Description | Payload (JSON) |
+| :--- | :--- | :--- | :--- |
+| `POST` | `/checkout` | Process a product purchase | `{"product_id": 1, "quantity": 2, "customer_name": "Zona"}` |
 ---
 **Status:** Core Backend Foundation Completed. Moving towards Fintech (Midtrans) Integration.
