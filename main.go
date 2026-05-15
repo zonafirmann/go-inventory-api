@@ -3,38 +3,58 @@ package main
 import (
 	"context"
 	"fmt"
+	"log"
 	"os"
 
 	"github.com/jackc/pgx/v5"
 )
 
 func main() {
-	// 1. String Koneksi (URL Format)
-	// Format: postgres://username:password@localhost:5432/nama_database
-	connString := "postgres://postgres:yona20042006stsd*@localhost:5432/inventory_db"
+	// Connection string: Replace 'PASSWORD_KAMU' with your actual PostgreSQL password
+	connString := "postgres://postgres:PASSWORD_KAMU@localhost:5432/inventory_db"
 
-	// 2. Membuka koneksi ke PostgreSQL 18
+	// Establish connection to PostgreSQL 18
 	conn, err := pgx.Connect(context.Background(), connString)
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Gagal koneksi ke database: %v\n", err)
+		fmt.Fprintf(os.Stderr, "Unable to connect to database: %v\n", err)
 		os.Exit(1)
 	}
 
-	// Pastikan koneksi ditutup saat program selesai
+	// Ensure connection is closed when the function finishes
 	defer conn.Close(context.Background())
 
-	// 3. Tes Koneksi dengan Query sederhana
-	var productName string
-	var price int
-	err = conn.QueryRow(context.Background(), "SELECT name, price FROM products WHERE id=1").Scan(&productName, &price)
+	fmt.Println("------------------------------------------")
+	fmt.Println("✅ STATUS: CONNECTED TO POSTGRESQL 18")
+	fmt.Println("------------------------------------------")
 
+	// Execute query to fetch all products from the table
+	rows, err := conn.Query(context.Background(), "SELECT id, name, stock, price FROM products")
 	if err != nil {
-		fmt.Fprintf(os.Stderr, "Query gagal: %v\n", err)
-		os.Exit(1)
+		log.Fatalf("Query execution failed: %v", err)
+	}
+	defer rows.Close()
+
+	fmt.Println("📦 CURRENT INVENTORY LIST:")
+
+	// Iterate through the result set
+	for rows.Next() {
+		var id int
+		var name string
+		var stock int
+		var price int
+
+		// Scan row data into local variables
+		err := rows.Scan(&id, &name, &stock, &price)
+		if err != nil {
+			log.Fatalf("Row scan failed: %v", err)
+		}
+
+		// Print formatted output to the terminal
+		fmt.Printf("ID: %d | Name: %-20s | Stock: %d | Price: Rp%d\n", id, name, stock, price)
 	}
 
-	fmt.Println("------------------------------------------")
-	fmt.Println("✅ STATUS: BERHASIL TERKONEKSI KE POSTGRES 18")
-	fmt.Printf("📦 Data Produk Pertama: %s (Harga: Rp%d)\n", productName, price)
-	fmt.Println("------------------------------------------")
+	// Check for any errors encountered during iteration
+	if rows.Err() != nil {
+		log.Fatalf("Error occurred during row iteration: %v", rows.Err())
+	}
 }
