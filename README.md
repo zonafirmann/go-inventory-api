@@ -1,44 +1,35 @@
-# 📦 Go Inventory API
+# 📦 Go Inventory API (PostgreSQL Edition)
 
-A high-performance, persistent RESTful API built with **Golang** to manage a warehouse inventory system. This project demonstrates core backend architecture principles, clean data modeling, and robust HTTP request handling without relying on heavy external frameworks.
+A high-performance Warehouse Inventory system built with Golang and PostgreSQL 18. This project demonstrates professional backend architecture, secure data persistence, and RESTful API standards.
 
-[![Enterprise Go CI/CD](https://github.com/zonafirmann/go-inventory-api/actions/workflows/go-ci.yml/badge.svg)](https://github.com/zonafirmann/go-inventory-api/actions/workflows/go-ci.yml)
-![Go Version](https://img.shields.io/github/go-mod/go-version/zonafirmann/go-inventory-api?style=flat&logo=go)
-![License](https://img.shields.io/github/license/zonafirmann/go-inventory-api?style=flat)
-![PostgreSQL](https://img.shields.io/badge/PostgreSQL-316192?style=for-the-badge&logo=postgresql&logoColor=white)
-
-A high-performance, persistent RESTful API... (lanjutkan teks aslinya)
-
-## ⚡ Core Features
-* **Full CRUD Operations:** Seamlessly Create, Read, Update, and Delete inventory items.
-* **Persistent Storage:** Utilizes a custom JSON I/O engine to ensure data durability across server restarts.
-* **Modular Architecture:** Clean separation of concerns with isolated struct models and routing logic.
-* **Continuous Integration:** Automated build and testing pipeline powered by GitHub Actions.
-
-## 🛠️ API Endpoints
-
-| Method | Endpoint | Description | Payload (JSON) |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/products` | Fetch all products in the warehouse | - |
-| `POST` | `/products` | Add a new product | `{"name": "string", "stock": int, "price": int}` |
-| `PUT` | `/products?id={id}` | Update stock and price of a product | `{"stock": int, "price": int}` |
-| `DELETE`| `/products?id={id}` | Remove a product from the warehouse | - |
-
-## 🛠️ Tech Stack Upgrade (2026 Standard)
-* **Language:** Go 1.22+
-* **Database:** PostgreSQL 18 (Relational Database)
-* **Driver:** `pgx/v5` (High-performance PostgreSQL driver for Go)
-* **CI/CD:** GitHub Actions with Static Analysis
+## 🚀 Features
+* **Clean Architecture:** Separated layers for Config, Models, Repository, and Handlers.
+* **Relational Database:** Powered by **PostgreSQL 18** for scalable data management.
+* **Security:** Implemented **Prepared Statements** to prevent SQL Injection.
+* **RESTful Endpoints:** Standardized JSON responses for frontend integration.
 
 ## 🏗️ System Architecture
-The system has been migrated from a flat JSON file to a robust **Relational Database Management System (RDBMS)**. This ensures:
-1. **Data Integrity:** Using Primary Keys and strict data types.
-2. **Concurrency:** Handling multiple requests without file locking issues.
-3. **Security:** Implementation of **Prepared Statements** to prevent SQL Injection attacks.
+The application follows the **Separation of Concerns** principle:
+- **`config/`**: Database connection management.
+- **`models/`**: Data structures and JSON mapping.
+- **`repository/`**: Direct SQL interactions with PostgreSQL.
+- **`handlers/`**: HTTP request and response logic.
 
-## 🚀 How to Run Locally
+## 🛠️ API Documentation
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/products` | Fetch all products from the database |
 
-1. Clone the repository and navigate to the project directory.
-2. Run the server:
-   ```bash
-   go run main.go
+## ⚙️ Prerequisites
+- Go 1.22+
+- PostgreSQL 18
+- `pgx/v5` Driver
+
+## 🚦 Getting Started
+1. Clone the repository.
+2. Configure your PostgreSQL connection in `config/database.go`.
+3. Run `go run main.go`.
+4. Access the API at `http://localhost:8080/products`.
+
+---
+**Status:** Core Backend Foundation Completed. Moving towards Fintech (Midtrans) Integration.
