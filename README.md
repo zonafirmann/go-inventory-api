@@ -38,6 +38,11 @@ The API now supports secure transaction processing with the following features:
 - **Stock Validation:** Prevents sales if stock is insufficient.
 - **Atomic Operations:** Automatically updates product stock upon successful transaction.
 
+## 💡 Business Value & Smart Features
+This API doesn't just store data; it provides actionable business intelligence:
+- **Smart Analytics Engine:** Rule-based algorithm to detect critical stock levels and overstock inefficiencies without relying on paid third-party APIs.
+- **Financial Integrity:** ACID-compliant checkout system ensuring exact stock deductions and preventing race conditions during high-traffic sales.
+
 ### New API Endpoint
 | Method | Endpoint | Description | Payload (JSON) |
 | :--- | :--- | :--- | :--- |
