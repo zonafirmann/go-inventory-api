@@ -19,6 +19,7 @@ The application follows the **Separation of Concerns** principle:
 | Method | Endpoint | Description |
 | :--- | :--- | :--- |
 | `GET` | `/products` | Fetch all products from the database |
+| `GET` | `/products/analytics` | Fetch automated smart inventory analysis and stock alerts |
 
 ## ⚙️ Prerequisites
 - Go 1.22+
